@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { PropagateLoader } from "react-spinners";
 
 function Success() {
   const [loading, setLoading] = useState(true);
+  const [gohome, setGohome] = useState(false);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
+
+    setTimeout(() => {
+      navigate("/");
+    }, 10000);
   }, []);
 
   return (
@@ -16,7 +25,9 @@ function Success() {
         <PropagateLoader color="#36d7b7" />
       ) : (
         <div>
-          <h2 className="text-3xl font-semibold mb-4 text-center">Order Successful!</h2>
+          <h2 className="text-3xl font-semibold mb-4 text-center">
+            Order Successful!
+          </h2>
           <p>Your order has been successfully placed</p>
         </div>
       )}
