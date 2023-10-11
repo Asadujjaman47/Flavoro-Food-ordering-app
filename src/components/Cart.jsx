@@ -29,9 +29,18 @@ function Cart() {
           />
         </div>
 
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
+        {cartItems.map((food) => {
+          return (
+            <ItemCard
+              key={food.id}
+              id={food.id}
+              name={food.name}
+              price={food.price}
+              img = {food.img}
+              qty={food.qty}
+            />
+          );
+        })}
 
         <div className="absolute bottom-0">
           <h3 className="font-semibold text-gray-800">Items : </h3>
