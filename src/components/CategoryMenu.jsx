@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import FoodData from "../data/FoodData";
 
+import { useDispatch } from "react-redux";
+import { setCategory } from "../redux/slices/CategorySlice";
+
 function CategoryMenu() {
   const [categories, setCategories] = useState([]);
+
   const listUniqueCategories = () => {
     const uniqueCategories = [
       ...new Set(FoodData.map((food) => food.category)),
@@ -15,6 +19,8 @@ function CategoryMenu() {
   useEffect(() => {
     listUniqueCategories();
   }, []);
+
+  const dispatch = useDispatch();
 
   return (
     <div className="mx-6">
@@ -39,6 +45,7 @@ function CategoryMenu() {
         {categories.map((category, index) => {
           return (
             <button
+              onClick={() => dispatch(setCategory(category))}
               key={index}
               className="px-3 py-2 bg-gray-200 font-bold rounded-lg hover:bg-green-500 hover:text-white"
             >
