@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 function FoodItems() {
   const category = useSelector((state) => state.category.category);
+  const search = useSelector((state) => state.search.search);
 
   const handleToast = (name) => toast.success(`Added ${name} to cart`);
 
@@ -27,11 +28,35 @@ function FoodItems() {
             />
           );
         })} */}
+
+        {/* 
         {FoodData.filter((food) => {
           if (category === "All") {
             return food;
           } else {
             return category === food.category;
+          }
+        }).map((food) => (
+          <FoodCard
+            key={food.id}
+            id={food.id}
+            name={food.name}
+            price={food.price}
+            desc={food.desc}
+            rating={food.rating}
+            img={food.img}
+            handleToast={handleToast}
+          />
+        ))} */}
+
+        {FoodData.filter((food) => {
+          if (category === "All") {
+            return food.name.toLowerCase().includes(search.toLowerCase());
+          } else {
+            return (
+              category === food.category &&
+              food.name.toLowerCase().includes(search.toLowerCase())
+            );
           }
         }).map((food) => (
           <FoodCard
