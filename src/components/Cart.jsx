@@ -5,6 +5,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import ItemCard from "./ItemCard";
 
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const [activeCart, setActiveCart] = useState(false);
@@ -17,6 +18,8 @@ function Cart() {
     (total, item) => total + item.qty * item.price,
     0
   );
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -60,7 +63,10 @@ function Cart() {
             Total Amount : {totalPrice}
           </h3>
           <hr className="w-[90vw] lg:w[18vw] my-2" />
-          <button className="bg-green-500 font-bold px-3 text-white py-2 rounded-lg w-[98vw] lg:w-[18vw] mb-5">
+          <button
+            onClick={() => navigate("/success")}
+            className="bg-green-500 font-bold px-3 text-white py-2 rounded-lg w-[98vw] lg:w-[18vw] mb-5"
+          >
             Checkout
           </button>
         </div>
